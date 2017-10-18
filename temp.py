@@ -1,13 +1,13 @@
 import cv2
-import numpy as np 
+import numpy as np
 
-img=cv2.imread('temp.jpg',cv2.IMREAD_COLOR)
+img = cv2.imread("card_1.jpg")
+BLUE_MIN = np.array([0, 0, 0], np.uint8)
+BLUE_MAX = np.array([100, 100, 100], np.uint8)
 
-rows,cols,shannels=img.shape
-#print(rows,cols)
-# cv2.namedWindow('image',cv2.WINDOW_NORMAL)
-# cv2.resizeWindow('image', rows,cols)
-image=img[140:450,100:300]
-cv2.imshow('card_1.jpg',image)
+dst = cv2.inRange(img, BLUE_MIN, BLUE_MAX)
+no_blue = cv2.countNonZero(dst)
+print('The number of blue pixels is: ' + str(no_blue))
+cv2.namedWindow("opencv")
+cv2.imshow("opencv",img)
 cv2.waitKey(0)
-cv2.destroyAllWindows()
